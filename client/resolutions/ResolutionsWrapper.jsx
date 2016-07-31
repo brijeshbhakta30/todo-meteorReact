@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import ResolutionsForm from './ResolutionsForm.jsx';
 import ResolutionSingle from './ResolutionSingle';
@@ -12,7 +13,7 @@ export default class ResolutionsWrapper extends TrackerReact(Component) {
 
         this.state = {
             subscription:{
-                resolutions: Meteor.subscribe("allResolutions")
+                resolutions: Meteor.subscribe("userResolutions")
             }
         }
     }
@@ -29,16 +30,26 @@ export default class ResolutionsWrapper extends TrackerReact(Component) {
     render () {
 
         return (
-            <div>
-                <h1>My Reslutions</h1>
+            <ReactCSSTransitionGroup
+                component="div"
+                transitionName="route"
+                transitionEnterTimeout={600}
+                transitionAppearTimeout={600}
+                transitionLeaveTimeout={400}
+                transitionAppear={true}>
+                <h1>My Reslutions - {Session.get("test")}</h1>
                 <ResolutionsForm />
-                <ul className="resolutions">
+                <ReactCSSTransitionGroup
+                    component="ul"
+                    className="resolutions"
+                    transitionName="resolutionLoad"
+                    transitionEnterTimeout={600}
+                    transitionLeaveTimeout={400}>
                     {this.resolutions().map( (resolution) => {
                         return <ResolutionSingle key={resolution._id} resolution={resolution}/>
                     })}
-
-                </ul>
-            </div>
+                </ReactCSSTransitionGroup>
+            </ReactCSSTransitionGroup>
         )
     }
 }
