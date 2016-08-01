@@ -17,7 +17,7 @@ export default class ResolutionSingle extends Component {
                     //title: 'Now Playing',
                     message: 'Resolution updated successfully.',
                     type: 'success',
-                    style: 'fixed-top',
+                    style: 'growl-top-right',
                     icon: 'fa-smile-o'
                 });
             }
