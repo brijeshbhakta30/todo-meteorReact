@@ -3,11 +3,47 @@ import React, {Component} from 'react';
 export default class ResolutionSingle extends Component {
 
     toggleChecked() {
-        Meteor.call("toggleResolution", this.props.resolution);
+        Meteor.call("toggleResolution", this.props.resolution, (error, data)=> {
+            if(error){
+                Bert.alert({
+                    //title: 'Now Playing',
+                    message: 'You are not authorized to update this resolution.',
+                    type: 'danger',
+                    style: 'fixed-top',
+                    icon: 'fa-frown-o'
+                });
+            }else{
+                Bert.alert({
+                    //title: 'Now Playing',
+                    message: 'Resolution updated successfully.',
+                    type: 'success',
+                    style: 'fixed-top',
+                    icon: 'fa-smile-o'
+                });
+            }
+        });
     }
 
     deleteResolution() {
-        Meteor.call("deleteResolution", this.props.resolution);
+        Meteor.call("deleteResolution", this.props.resolution, (error, data)=> {
+            if(error){
+                Bert.alert({
+                    //title: 'Now Playing',
+                    message: 'You are not authorized to delete this resolution.',
+                    type: 'danger',
+                    style: 'fixed-top',
+                    icon: 'fa-frown-o'
+                });
+            }else{
+                Bert.alert({
+                    //title: 'Now Playing',
+                    message: 'Resolution deleted successfully.',
+                    type: 'success',
+                    style: 'fixed-top',
+                    icon: 'fa-smile-o'
+                });
+            }
+        });
     }
 
     render() {

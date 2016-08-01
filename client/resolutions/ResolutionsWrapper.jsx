@@ -37,7 +37,7 @@ export default class ResolutionsWrapper extends TrackerReact(Component) {
                 transitionAppearTimeout={600}
                 transitionLeaveTimeout={400}
                 transitionAppear={true}>
-                <h1>My Reslutions - {Session.get("test")}</h1>
+                <h1>My Reslutions</h1>
                 <ResolutionsForm />
                 <ReactCSSTransitionGroup
                     component="ul"
